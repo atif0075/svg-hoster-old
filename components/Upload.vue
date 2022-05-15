@@ -58,7 +58,7 @@
         v-if="msgVal"
         class="bg-mud px-5 py-3 rounded border border-dashed text-white-primary border-green border-2"
       >
-        <p>Not a valid type</p>
+        <p>{{ msg }}</p>
       </div>
     </div>
   </section>
@@ -111,6 +111,7 @@ function getLink(e: any) {
           progress.value = 0;
           pathName.value = null;
         }, 1000);
+
         checker = true;
       },
       (error: any) => {
@@ -125,6 +126,11 @@ function getLink(e: any) {
             obj["name"] = pathName.value;
             obj["color"] = false;
             store.imagesHistory.push(obj);
+            msgVal.value = true;
+            msg.value = "Open History to see your SVG";
+            setTimeout(() => {
+              msgVal.value = false;
+            }, 3000);
             // store.imagesHistory.push(downloadURL);
           }
         });
@@ -132,6 +138,7 @@ function getLink(e: any) {
     );
   } else {
     msgVal.value = true;
+    msg.value = "Not a valid type";
     pathName.value = null;
     setTimeout(() => {
       msgVal.value = false;

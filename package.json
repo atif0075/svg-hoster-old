@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.3",
+    "nuxt-windicss": "^2.3.1"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.1.9",
+    "firebase": "^9.8.1",
+    "pinia": "^2.0.14",
+    "pinia-plugin-persistedstate": "^1.5.1",
+    "windicss": "^3.5.3"
+  }
+}

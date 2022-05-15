@@ -7,6 +7,8 @@
   </section>
 </template>
 <script setup>
-import { ref } from "vue";
+useMeta({
+  title: "SVG Host - Home",
+});
 </script>
 <style scoped></style>

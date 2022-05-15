@@ -101,7 +101,9 @@
 import { useStore } from "~~/store/store";
 
 const store = useStore();
-
+useMeta({
+  title: "SVG Host - History",
+});
 let white = ref(true);
 let black = ref(false);
 let whiteToggle = () => {

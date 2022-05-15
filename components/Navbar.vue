@@ -7,7 +7,7 @@
       >
         <div class="text-red-600">
           <img src="https://firebasestorage.googleapis.com/v0/b/svg-hosting-4b46e.appspot.com/o/images%2Fvector.svg?alt=media&token=5a62a5aa-691c-4b07-9e31-4856feb41933" />
-          {{ store.name }}
+       
         </div>
       </NuxtLink>
       <ul
@@ -50,10 +50,7 @@
     </nav>
   </section>
 </template>
-<script setup lang="ts">
-import { useStore } from "~~/store/store";
-const store = useStore();
-</script>
+
 <style lang="postcss" scoped>
 .router-link-active {
   @apply text-green;

@@ -1,5 +1,5 @@
 <template>
-  <section class="pt-20">
+  <section class="pt-20 min-h-screen">
     <main v-if="store.imagesHistory.length != 0" class="p-2 md:p-8">
       <div class="flex justify-between items-center">
         <h1 class="text-xl font-bold text-white-primary">All Links</h1>

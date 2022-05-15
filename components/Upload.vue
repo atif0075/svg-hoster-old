@@ -107,6 +107,10 @@ function getLink(e: any) {
         progress.value =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress.value + "% done");
+        setTimeout(() => {
+          progress.value = 0;
+          pathName.value = null;
+        }, 1000);
         checker = true;
       },
       (error: any) => {
@@ -116,7 +120,12 @@ function getLink(e: any) {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log("File available at", downloadURL);
           if (checker == true) {
-            store.imagesHistory.push(downloadURL);
+            let obj = {};
+            obj["url"] = downloadURL;
+            obj["name"] = pathName.value;
+            obj["color"] = false;
+            store.imagesHistory.push(obj);
+            // store.imagesHistory.push(downloadURL);
           }
         });
       }

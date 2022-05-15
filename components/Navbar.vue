@@ -6,7 +6,7 @@
         class="inline-flex items-center justify-center w-10 h-10 border-[#00dc801e] border rounded-lg"
       >
         <div class="text-red-600">
-          <img src="../assets/vector.svg" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/svg-hosting-4b46e.appspot.com/o/images%2Fvector.svg?alt=media&token=5a62a5aa-691c-4b07-9e31-4856feb41933" />
           {{ store.name }}
         </div>
       </NuxtLink>
@@ -14,7 +14,7 @@
         class="flex items-center space-x-2 text-sm font-medium text-white-primary"
       >
         <li>
-          <NuxtLink to="/" class="px-3 py-2 rounded-lg" href="/">
+          <NuxtLink to="/" class="px-3 py-2 rounded-lg">
             Home
           </NuxtLink>
         </li>
@@ -50,7 +50,7 @@
     </nav>
   </section>
 </template>
-<script setup>
+<script setup lang="ts">
 import { useStore } from "~~/store/store";
 const store = useStore();
 </script>

@@ -44,10 +44,21 @@
             <span class="mt-2 text-base leading-normal uppercase"
               >Select a file</span
             >
-            <input @change="getLink($event)" type="file" class="hidden" />
+            <input
+              @change="getLink($event)"
+              type="file"
+              accept=".svg"
+              class="hidden"
+            />
             <div class="text-xs">{{ pathName }}</div>
           </label>
         </p>
+      </div>
+      <div
+        v-if="msgVal"
+        class="bg-mud px-5 py-3 rounded border border-dashed text-white-primary border-green border-2"
+      >
+        <p>Not a valid type</p>
       </div>
     </div>
   </section>
@@ -75,39 +86,49 @@ let progress = ref(0);
 const store = useStore();
 let pathName = ref();
 let path = ref();
-const log = () => {
-  console.log("...args");
-};
+let msgVal = ref(false);
+const msg = ref();
 function getLink(e: any) {
   pathName.value = e.target.files[0].name;
   path.value = e.target.files[0];
-  let checker = false;
-  const storage = getStorage();
-  const storageRef = sRef(storage, "images/" + pathName.value);
-  const uploadTask = uploadBytesResumable(storageRef, path.value);
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      progress.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log("Upload is " + progress.value + "% done");
-      checker = true;
-    },
-    (error: any) => {
-      console.log(error);
-    },
-    () => {
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log("File available at", downloadURL);
-        if (checker == true) {
-          store.imagesHistory.push(downloadURL);
-        }
-      });
-    }
-  );
+  const acceptedImage = [".svg"];
+  const extension = pathName.value.substring(pathName.value.lastIndexOf("."));
+  const isValidImage = acceptedImage.find((m) => m === extension) != null;
+  console.log("isValidImage", isValidImage);
+  console.log("extension", extension);
+  if (isValidImage) {
+    let checker = false;
+    const storage = getStorage();
+    const storageRef = sRef(storage, "images/" + pathName.value);
+    const uploadTask = uploadBytesResumable(storageRef, path.value);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        progress.value =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress.value + "% done");
+        checker = true;
+      },
+      (error: any) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          if (checker == true) {
+            store.imagesHistory.push(downloadURL);
+          }
+        });
+      }
+    );
+  } else {
+    msgVal.value = true;
+    pathName.value = null;
+    setTimeout(() => {
+      msgVal.value = false;
+    }, 2000);
+  }
 }
-let print = () => {
-  console.log("printlink");
-};
 </script>
 <style lang="postcss">
 .grad {
